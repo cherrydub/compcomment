@@ -1,7 +1,7 @@
 import FeedbackItem from "./FeedbackItem";
 import Spinner from "../Spinner";
 import ErrorMesage from "../ErrorMessage";
-import { TFeedbackItem } from "../../lib/types";
+import { useFeedbackItemsContext } from "../../contexts/FeedbackItemsContextProvider";
 
 // const exampleFeedbackItems = [
 //   {
@@ -27,24 +27,17 @@ import { TFeedbackItem } from "../../lib/types";
 //   },
 // ];
 
-type FeedbackListProps = {
-  feedbackItems: TFeedbackItem[];
-  isLoading: boolean;
-  errorMessage: string;
-};
+export default function FeedbackList() {
+  const { isLoading, errorMessage, filteredFeedbackItems } =
+    useFeedbackItemsContext();
 
-export default function FeedbackList({
-  feedbackItems,
-  isLoading,
-  errorMessage,
-}: FeedbackListProps) {
   return (
     <ol className="feedback-list">
       {isLoading && <Spinner />}
 
       {errorMessage && <ErrorMesage message={errorMessage} />}
 
-      {feedbackItems.map((item) => (
+      {filteredFeedbackItems.map((item) => (
         <FeedbackItem key={item.id} feedbackItem={item} />
       ))}
     </ol>
