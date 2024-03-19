@@ -1,17 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { TFeedbackItem } from "./types";
-import { FeedbackItemsContext } from "../contexts/FeedbackItemsContextProvider";
-
-export function useFeedbackItemsContext() {
-  const context = useContext(FeedbackItemsContext);
-  if (!context) {
-    throw new Error(
-      "FeedbackItemsContext is not defined in FeedbackList component"
-    );
-  }
-
-  return context;
-}
 
 export function useFeedbackItems() {
   const [feedbackItems, setFeedbackItems] = useState<TFeedbackItem[]>([]);
